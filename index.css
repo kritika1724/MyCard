@@ -1,23 +1,25 @@
 body {
-  background-color: #f0f0f0;             /* Light gray background */
+  background-color: #f0f0f0;
   font-family: 'Quicksand', sans-serif;
-  font-weight: 300;  /* Google Font */
-  display: flex;                         /* Enables flexbox layout */
-  align-items: center;                   /* Vertically center */
-  justify-content: center;               /* Horizontally center */
-  height: 100vh;                         /* Full viewport height */
-  margin: 0;                           /* Remove default body margin */
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 /* Flip Wrapper */
 .card-wrapper {
-  perspective: 1000px;
+  perspective: 1200px;
+  width: 90%;
+  max-width: 350px;
 }
 
 /* Card Flip Base */
 .card {
-  width: 90vw;
-  max-width: 350px;  
+  width: 100%;
   height: 450px;
   position: relative;
   transform-style: preserve-3d;
@@ -34,10 +36,9 @@ body {
   width: 100%;
   height: 100%;
   padding: 2rem;
-  border-radius: 0px;
+  border-radius: 15px;
   box-sizing: border-box;
   backface-visibility: hidden;
-  background:linear-gradient(106.64deg, #B724EB 0%, #09FFC4 81.39%);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -46,6 +47,10 @@ body {
 }
 
 /* Front Side */
+.card-front {
+  background: linear-gradient(106.64deg, #B724EB 0%, #09FFC4 81.39%);
+}
+
 .card-front::before {
   content: "";
   position: absolute;
@@ -54,22 +59,15 @@ body {
   right: -2px;
   bottom: -2px;
   z-index: -1;
-  /* background:; */
   background-size: 600% 600%;
   animation: animated-border 8s linear infinite;
-  border-radius: 0px;
+  border-radius: 15px;
 }
 
 @keyframes animated-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Back Side */
@@ -77,41 +75,42 @@ body {
   transform: rotateX(180deg);
   background: #111;
   color: #f0f0f0;
-  border-radius: 0px;
+  border-radius: 15px;
   border: 2px solid #00f0ff;
   box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+  padding: 1.5rem;
+  text-align: center;
 }
 
-/* Image */
-.profile-img {
-  width: 100px;
+/* Circular Image */
+.circular-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 20px;
+  border: 2px solid #333;
+  margin-bottom: 15px;
 }
 
-/* Links */
+/* Links / Social Icons */
 .card a {
   color: #00bcd4;
   text-decoration: none;
-  margin: 8px 0;
+  margin: 0 8px;
   font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .card a:hover {
   text-decoration: underline;
 }
+
 span i {
-  margin-right: 10px; /* adds space between icons */
-}
-.circular-img {
-  width: 150px;           /* Adjust size */
-  height: 150px;          /* Make it equal to width */
-  object-fit: cover;      /* Ensure the image covers the circle */
-  border-radius: 50%;     /* This makes it circular */
-  border: 2px solid #333; /* Optional: border */
+  margin-right: 10px;
 }
 
-@media (max-width: 400px) {
+/* Responsive adjustments */
+@media (max-width: 600px) {
   .card {
     height: 400px;
   }
@@ -122,18 +121,21 @@ span i {
     width: 120px;
     height: 120px;
   }
-  .profile-img {
-    width: 80px;
-  }
-  span i {
-    margin-right: 8px;
-    font-size: 1.2rem;
-  }
   .card-face h1, .card-face h2, .card-face p {
     font-size: 1rem;
   }
+  .card a {
+    font-size: 1rem;
+    margin: 0 6px;
+  }
 }
 
-html, body {
-  overflow-x: hidden;
+@media (max-width: 400px) {
+  .card {
+    height: 360px;
+  }
+  .circular-img {
+    width: 100px;
+    height: 100px;
+  }
 }
